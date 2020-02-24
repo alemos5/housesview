@@ -1,0 +1,22 @@
+# Cantida de amenities
+
+ALTER TABLE `houseview`.`propiedad_eav_value`
+ADD COLUMN `cantidad` INT NULL DEFAULT 0 AFTER `updated_at`;
+
+# Cantidad de vistas
+
+ALTER TABLE `houseview`.`propiedades`
+ADD COLUMN `vista` INT NULL DEFAULT 0 AFTER `deleted_at`;
+
+ALTER TABLE `propiedades` ADD `muestra` INT(11) NULL DEFAULT '0' AFTER `vista`;
+
+# Add tipo dueño
+
+ALTER TABLE `propiedades` ADD `tipo_duenio_id` INT NULL AFTER `tipo_propiedades_id`;
+
+# Multimedia de la propiedad
+
+ALTER TABLE `propiedades` ADD `img` VARCHAR(250) NULL AFTER `muestra`, ADD `script` TEXT NULL AFTER `img`;
+
+ALTER TABLE `propiedades` ADD `descripcion` TEXT NULL AFTER `titulo`;
+ALTER TABLE `propiedad_eavs` ADD `icon` VARCHAR(250) NULL AFTER `attribute`;

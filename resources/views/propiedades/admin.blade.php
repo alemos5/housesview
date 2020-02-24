@@ -1,0 +1,37 @@
+
+
+@extends('layouts.app')
+@section('content')
+<div class="bg-gray">
+  <div class="p-t-20">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <section class="content-header">
+              <h1 class="pull-left">Propiedades</h1>
+              <h1 class="pull-right">
+                 <!-- <a class="btn btn-primary pull-right" style="margin-top: -10px;margin-bottom: 5px" href="{!! route('propiedades.create') !!}">Add New Propiedad</a> -->
+              </h1>
+          </section>
+          <div class="content">
+              <div class="clearfix"></div>
+
+              @include('flash::message')
+
+              <div class="clearfix"></div>
+              <div class="box box-primary">
+                  <div class="box-body">
+                          @include('propiedades.table')
+                  </div>
+              </div>
+              <div class="text-center">
+
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+@endsection

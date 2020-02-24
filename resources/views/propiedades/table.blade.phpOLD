@@ -1,0 +1,164 @@
+
+<div class="table-responsive">
+    <table class="table" id="propiedades-table">
+        <thead>
+            <tr>
+                <th>Fecha Vencimiento</th>
+        <th>Tipo Operacions Id</th>
+        <th>Tipo Propiedades Id</th>
+        <th>Provincias Id</th>
+        <th>Ciudads Id</th>
+        <th>Localidads Id</th>
+        <th>Direccion</th>
+{{--        <th>Latitud</th>--}}
+{{--        <th>Longitud</th>--}}
+        <th>Titulo</th>
+        <th>Precio</th>
+        <th>Moneda</th>
+        <th>Expensas</th>
+        <th>Cant Ambiente</th>
+        <th>Cant Dormitorio</th>
+        <th>Cant Banio</th>
+        <th>Cant Cochera</th>
+        <th>Cant Toilettes</th>
+        <th>Tipo Antiguedas Id</th>
+        <th>Anios</th>
+        <th>Metros</th>
+        <th>Metros Totales</th>
+        <th>User Id</th>
+                <td>Ver Recorrido</td>
+                <td>Subir Recorrido</td>
+                <th colspan="3">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($propiedades as $propiedades)
+            <tr>
+            <td>
+                <?php
+                $orden = \App\Models\Ordenes::where('id', $propiedades->orden_id)->first();
+                echo $orden['fecha_hasta'];
+               ?>
+            </td>
+            <td>{!! $propiedades->tipo_operacions_id !!}</td>
+            <td>{!! $propiedades->tipo_propiedades_id !!}</td>
+            <td>{!! $propiedades->provincias_id !!}</td>
+            <td>{!! $propiedades->ciudads_id !!}</td>
+            <td>{!! $propiedades->localidads_id !!}</td>
+            <td>{!! $propiedades->direccion !!}</td>
+{{--            <td>{!! $propiedades->latitud !!}</td>--}}
+{{--            <td>{!! $propiedades->longitud !!}</td>--}}
+            <td>{!! $propiedades->titulo !!}</td>
+            <td>{!! $propiedades->precio !!}</td>
+            <td>{!! $propiedades->moneda !!}</td>
+            <td>{!! $propiedades->expensas !!}</td>
+            <td>{!! $propiedades->cant_ambiente !!}</td>
+            <td>{!! $propiedades->cant_dormitorio !!}</td>
+            <td>{!! $propiedades->cant_banio !!}</td>
+            <td>{!! $propiedades->cant_cochera !!}</td>
+            <td>{!! $propiedades->cant_toilettes !!}</td>
+            <td>{!! $propiedades->tipo_antiguedas_id !!}</td>
+            <td>{!! $propiedades->anios !!}</td>
+            <td>{!! $propiedades->metros !!}</td>
+            <td>{!! $propiedades->metros_totales !!}</td>
+            <td>{!! $propiedades->user_id !!}</td>
+                <td>
+                    {!! $propiedades->script !!}
+                    <button onclick="idIframeRecorrido({{$propiedades->id}}, '<?php echo $propiedades->script; ?>')" class="btn btn-primary pull-right" >
+                        Ver
+                    </button>
+                </td>
+                <td>
+                    <button onclick="IdaddRecorrido({{$propiedades->id}})" class="btn btn-primary pull-right" data-toggle="modal" data-target="#myModal">
+                        Recorrido
+                    </button>
+                </td>
+                <td>
+                    {!! Form::open(['route' => ['propiedades.destroy', $propiedades->id], 'method' => 'delete']) !!}
+                    <div class='btn-group'>
+                        <a href="{!! route('propiedades.show', [$propiedades->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-eye-open"></i></a>
+                        <a href="{!! route('propiedades.edit', [$propiedades->id]) !!}" class='btn btn-default btn-xs'><i class="glyphicon glyphicon-edit"></i></a>
+                        {!! Form::button('<i class="glyphicon glyphicon-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
+                    </div>
+                    {!! Form::close() !!}
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Agregar recorrido</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form method="POST" action="{{route('uploadFile')}}" accept-charset="UTF-8" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <label for="archivo"><b>Archivo: </b></label><br>
+                    <input type="file" name="archivo" required>
+                    <input type="hidden" id="idPropiedad" value="0" name="idPropiedad">
+                    <input class="btn btn-success" type="submit" value="Enviar" >
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Agregar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!-- The Modal -->
+<div class="modal" id="myModalRecorrido">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Recorrido</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="iframeRecorrido"></div>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function IdaddRecorrido(id)
+    {
+        $("#idPropiedad").val(id);
+    }
+
+    function idIframeRecorrido(id, url)
+    {
+        var urlFinal = "<?php echo URL::to('/').'/'; ?>"+url;
+        //var url = _"<?php //echo URL::to('/').'recorrido/'; ?>"+id;
+        // $('#iframeRecorrido').html('<iframe id="iframeRecorrido" src="'+urlFinal+'"></iframe>');
+        window.open(urlFinal, '_blank');
+    }
+
+</script>
