@@ -2,52 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b083b995-a492-43a7-9f75-016bc3182c68" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/cambios/030122020" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/favoritos/user.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mails/compraPlan.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mails/contacto.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mails/createPropiedad.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mails/emergency_call.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/mails/vencimientoPropiedad.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/payment-order-result.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/propiedades/admin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Console/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Console/Kernel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/AppBaseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/AppBaseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/LoginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/autorController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/autorController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/CreateautorRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/CreateautorRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateautorRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateautorRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/autor.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/autor.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Notifications/WelcomeNotification.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Notifications/WelcomeNotification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Repositories/autorRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Repositories/autorRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/factories/autorFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/factories/autorFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_08_23_203715_create_autors_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_08_23_203715_create_autors_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/.htaccess" beforeDir="false" afterPath="$PROJECT_DIR$/public/.htaccess" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logo-web-casillero.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/logo-web-casillero.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logohouseview.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/logohouseview.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/logoprurururur-1 (copia).png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/logoprurururur-1 (copia).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/wrappixel/material-pro/4.2.1/assets/images/background/login-register.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/wrappixel/material-pro/4.2.1/assets/images/background/login-register.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vendor/wrappixel/material-pro/4.2.1/assets/images/userbg.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/vendor/wrappixel/material-pro/4.2.1/assets/images/userbg.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/login.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/login.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/autors/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/autors/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/autors/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/autors/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/autors/fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/autors/fields.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/autors/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/autors/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/autors/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/autors/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/autors/show_fields.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/autors/show_fields.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/autors/table.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/autors/table.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/includes/head.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/includes/head.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/includes/menu-front.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/includes/menu-front.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/front/parts-front/banner-top-home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/front/parts-front/banner-top-home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home-one.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home-one.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/ordenes/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/ordenes/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ApiTestTrait.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ApiTestTrait.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="120" column="19" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
+            <state relative-caret-position="2520">
+              <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
             </state>
           </provider>
         </entry>
@@ -87,12 +42,12 @@
         <entry file="file://$PROJECT_DIR$/resources/views/user/index.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="84">
-              <caret line="4" column="81" lean-forward="true" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="81" />
+              <caret line="4" column="81" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="81" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ClientesController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="403">
@@ -104,7 +59,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Clientes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
+            <state relative-caret-position="1449">
               <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
             </state>
           </provider>
@@ -122,7 +77,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PropiedadesController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
+            <state relative-caret-position="588">
               <caret line="42" column="45" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
               <folding>
                 <element signature="e#40#87#0#PHP" expanded="true" />
@@ -149,11 +104,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="417">
-              <caret line="31" column="42" selection-start-line="31" selection-start-column="42" selection-end-line="31" selection-end-column="42" />
+            <state relative-caret-position="228">
+              <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -264,11 +219,11 @@
         <option value="$PROJECT_DIR$/resources/views/partials/menu.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/propiedades/index.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/user/publicate.blade.php" />
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/resources/views/user/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/Clientes.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ClientesController.php" />
+        <option value="$PROJECT_DIR$/.env" />
       </list>
     </option>
   </component>
@@ -406,61 +361,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Http" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="clientes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="propiedades" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="houseview" type="b2602c69:ProjectViewProjectNode" />
-              <item name="houseview" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="housesview" type="b2602c69:ProjectViewProjectNode" />
+              <item name="housesview" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -560,13 +472,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186318000" />
+    <option name="totallyTimeSpent" value="186327000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="-1" width="1920" height="1045" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20181043" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20394036" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -917,8 +829,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="31" column="42" selection-start-line="31" selection-start-column="42" selection-end-line="31" selection-end-column="42" />
+        <state relative-caret-position="228">
+          <caret line="13" column="22" selection-start-line="13" selection-start-column="22" selection-end-line="13" selection-end-column="22" />
         </state>
       </provider>
     </entry>
@@ -938,14 +850,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/web.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="120" column="19" selection-start-line="120" selection-start-column="19" selection-end-line="120" selection-end-column="19" />
+        <state relative-caret-position="2520">
+          <caret line="120" lean-forward="true" selection-start-line="120" selection-end-line="120" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PropiedadesController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
+        <state relative-caret-position="588">
           <caret line="42" column="45" selection-start-line="42" selection-start-column="45" selection-end-line="42" selection-end-column="45" />
           <folding>
             <element signature="e#40#87#0#PHP" expanded="true" />
@@ -956,13 +868,13 @@
     <entry file="file://$PROJECT_DIR$/resources/views/user/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
-          <caret line="4" column="81" lean-forward="true" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="81" />
+          <caret line="4" column="81" selection-start-line="4" selection-start-column="71" selection-end-line="4" selection-end-column="81" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/Clientes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
+        <state relative-caret-position="1449">
           <caret line="70" lean-forward="true" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
