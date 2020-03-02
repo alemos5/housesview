@@ -13,6 +13,7 @@ use App\Repositories\OrdenesRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
+use Illuminate\Support\Facades\DB;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Response;
 use App\User;
@@ -222,5 +223,36 @@ class OrdenesController extends AppBaseController
         }
         return false;
     }
+
+    public function success($id)
+    {
+        $orden = Ordenes::where('id', '=', $id)->first();
+        $orden->estatus = 1;
+        $orden->save();
+        return redirect('user/publicate');
+    }
+
+    public function failure($id)
+    {
+        $orden = Ordenes::where('id', '=', $id)->first();
+        $orden->estatus = 0;
+        $orden->save();
+        return redirect('user/publicate');
+    }
+
+    public function pending($id)
+    {
+        $orden = Ordenes::where('id', '=', $id)->first();
+        $orden->estatus = 0;
+        $orden->save();
+        return redirect('user/publicate');
+    }
+    public function cancelarOrden()
+    {
+        DB::select(
+            "DELETE FROM `ordenes` WHERE `user_id`='".Auth::user()->id_cliente."' AND estatus = 0;"
+        );
+    }
+
 
 }

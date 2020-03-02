@@ -7,13 +7,38 @@
     <?php
     $orden = \App\Http\Controllers\OrdenesController::isOrderPagar();
     if ($orden) {
+        $orden = \App\Models\Ordenes::where('user_id', Auth::user()->id_cliente)->where('estatus', 0)->first();
+        $plan = \App\Models\Planes::where('id', '=', $orden->plan_id)->first();
+        MercadoPago\SDK::setAccessToken('APP_USR-3085580077256129-101913-2f4b60650f736fc62285fef4a9745e01-156907953');
+        $preference = new MercadoPago\Preference();
+        $item = new MercadoPago\Item();
+        $item->title = $plan->plan;
+        $item->quantity = 1;
+        $item->unit_price = $orden->valor;
+        $preference->items = array($item);
+        $preference->back_urls = array(
+            "success" => "https://visithouse.com.ar/ordenes/success/".$orden->id,
+            "failure" => "https://visithouse.com.ar/ordenes/failure/".$orden->id,
+            "pending" => "https://visithouse.com.ar/ordenes/pending/".$orden->id
+        );
+        $preference->auto_return = "approved";
+        $preference->save();
         ?>
         <div class="bg-gray publicate">
             <div class="container page text-center" style="min-height: 600px">
             <h2>Orden Pendiente</h2>
             <p>Hemos detectado que tenes una orden perdiente de pago, para poder cargar los datos de tu propiedad primero debes realizar el pago de tu orden</p>
-              <a href="https://www.mercadopago.com/mla/checkout/start?pref_id=156907953-3693c0d1-682a-4f07-b023-da70a8003c0c" class="btn  btn-lg btn-success m-t-20">
-                  Pagar
+{{--              <a href="https://www.mercadopago.com/mla/checkout/start?pref_id=156907953-3693c0d1-682a-4f07-b023-da70a8003c0c" class="btn  btn-lg btn-success m-t-20">--}}
+{{--                  Pagar--}}
+{{--              </a>--}}
+                <form action="/procesar-pago" method="POST">
+                    <script
+                        src="https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js"
+                        data-preference-id="<?php echo $preference->id; ?>">
+                    </script>
+                </form>
+              <a onclick="cancelarOrden()" href=""  class="btn  btn-lg btn-danger m-t-20">
+                  Cancelar
               </a>
       </div>
       </div>
@@ -381,6 +406,24 @@ button.addEventListener("click", function () {
 
 
 });
+
+function cancelarOrden() {
+
+    var opcion = confirm("¿Desea realmente eliminar la orden?");
+    if (opcion == true) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        jQuery.post("<?php echo route('/') . "/user/canlar-orden"; ?>", {orden_id:1},
+            function (data) {
+                location.reload();
+            });
+    }
+}
+
 </script>
 
 

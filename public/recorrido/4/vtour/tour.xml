@@ -1,0 +1,232 @@
+﻿<krpano version="1.20" title="Virtual Tour">
+
+	<include url="skin/vtourskin.xml" />
+
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="true"
+	               maps_loadonfirstuse="true"
+	               gyro="true"
+	               gyro_keeplookingdirection="true"
+	               webvr="true"
+	               webvr_keeplookingdirection="false"
+	               webvr_prev_next_hotspots="true"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="true"
+	               thumbs="true"
+	               thumbs_width="120" thumbs_height="80" thumbs_padding="10" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="true"
+	               thumbs_dragging="false"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="true"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="false"
+	               tooltips_mapspots="false"
+	               deeplinking="true"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext="Cargando..."
+	               layout_width="100%"
+	               layout_maxwidth="814"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin.png"
+	               design_bgcolor="B7C5D1"
+	               design_bgalpha="0.8"
+	               design_bgborder="0"
+	               design_bgroundedge="1"
+	               design_bgshadow="0 4 10 0x000000 0.3"
+	               design_thumbborder_bgborder="3 0xFFFFFF 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="0"
+	               design_text_css="color:#FFFFFF; font-family:Arial;"
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+
+
+	<!-- startup action - load the first scene -->
+	<action name="startup" autorun="onstart">
+		if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
+		loadscene(get(startscene), null, MERGE);
+		if(startactions !== null, startactions() );
+	</action>
+
+	<scene name="scene_Fachada" title="Fachada" onstart="" thumburl="panos/Fachada.tiles/thumb.jpg" lat="-34.68055556" lng="-58.32555556" heading="0.0">
+
+		<view hlookat="169.338" vlookat="4.685" fovtype="MFOV" fov="113.676" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Fachada.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Fachada.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1152,2176" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-170.320" atv="4.998" linkedscene="scene_pasillo" />
+
+	</scene>
+
+	<scene name="scene_Pasillo" title="Pasillo" onstart="" thumburl="panos/Pasillo.tiles/thumb.jpg" lat="-34.68075000" lng="-58.32586111" heading="0.0">
+
+		<view hlookat="-7.672" vlookat="1.384" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Pasillo.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Pasillo.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-9.814" atv="5.148" linkedscene="scene_patio" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="172.907" atv="8.797" linkedscene="scene_fachada" />
+
+	</scene>
+
+	<scene name="scene_Patio" title="Patio" onstart="" thumburl="panos/Patio.tiles/thumb.jpg" lat="-34.68050000" lng="-58.32580556" heading="0.0">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Patio.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Patio.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="127.379" atv="16.389" linkedscene="scene_pasillo" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="45.765" atv="10.618" linkedscene="scene_escalera" />
+
+	</scene>
+
+	<scene name="scene_Escalera" title="Escalera" onstart="" thumburl="panos/Escalera.tiles/thumb.jpg" lat="-34.68055556" lng="-58.32566667" heading="0.0">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Escalera.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Escalera.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="163.626" atv="49.093" linkedscene="scene_patio" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="-9.825" atv="2.871" linkedscene="scene_escalera_p1" />
+
+	</scene>
+
+	<scene name="scene_Escalera_P1" title="Escalera P1" onstart="" thumburl="panos/Escalera_P1.tiles/thumb.jpg" lat="-34.68058333" lng="-58.32563889" heading="0.0">
+
+		<view hlookat="16.617" vlookat="-19.292" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Escalera_P1.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Escalera_P1.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="8.405" atv="-16.616" linkedscene="scene_entrada_terraza" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="-172.940" atv="49.869" linkedscene="scene_escalera" />
+
+	</scene>
+
+	<scene name="scene_Entrada_Terraza" title="Entrada Terraza" onstart="" thumburl="panos/Entrada_Terraza.tiles/thumb.jpg" lat="-34.68055556" lng="-58.32572222" heading="0.0">
+
+		<view hlookat="-34.595" vlookat="4.202" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Entrada_Terraza.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Entrada_Terraza.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-102.126" atv="33.443" linkedscene="scene_escalera_p1" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="-37.642" atv="10.079" linkedscene="scene_centro_terrazza" />
+
+	</scene>
+
+	<scene name="scene_Centro_Terrazza" title="Centro Terrazza" onstart="" thumburl="panos/Centro_Terrazza.tiles/thumb.jpg" lat="-34.68063889" lng="-58.32575000" heading="0.0">
+
+		<view hlookat="-28.197" vlookat="10.412" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Centro_Terrazza.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Centro_Terrazza.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-49.496" atv="16.251" linkedscene="scene_comedor" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="22.190" atv="8.824" linkedscene="scene_ba__o" />
+		<hotspot name="spot3" style="skin_hotspotstyle" ath="-128.516" atv="12.498" linkedscene="scene_habitacion" />
+		<hotspot name="spot4" style="skin_hotspotstyle" ath="-23.267" atv="8.380" linkedscene="scene_entrada_terraza" />
+
+	</scene>	
+
+	<scene name="scene_Comedor" title="Comedor" onstart="" thumburl="panos/Comedor.tiles/thumb.jpg" lat="-34.68080556" lng="-58.32575000" heading="0.0">
+
+		<view hlookat="-37.189" vlookat="13.252" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Comedor.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Comedor.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-44.340" atv="17.500" linkedscene="scene_centro_terrazza" />
+
+	</scene>
+
+	<scene name="scene_Habitacion" title="Habitacion" onstart="" thumburl="panos/Habitacion.tiles/thumb.jpg" lat="-34.68066667" lng="-58.32572222" heading="0.0">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Habitacion.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Habitacion.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-69.439" atv="17.334" linkedscene="scene_centro_terrazza" />
+		<hotspot name="spot2" style="skin_hotspotstyle" ath="42.389" atv="25.006" linkedscene="scene_balc__n" />
+
+	</scene>
+
+
+	<scene name="scene_Balc__n" title="Balcón" onstart="" thumburl="panos/Balc__n.tiles/thumb.jpg" lat="-34.68072222" lng="-58.32580556" heading="0.0">
+
+		<view hlookat="-182.215" vlookat="24.285" fovtype="MFOV" fov="120.000" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Balc__n.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Balc__n.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="1.061" atv="33.746" linkedscene="scene_habitacion" />
+
+	</scene>
+
+	<scene name="scene_Ba__o" title="Baño" onstart="" thumburl="panos/Ba__o.tiles/thumb.jpg" lat="-34.68066667" lng="-58.32566667" heading="0.0">
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="2.0" fovmin="70" fovmax="140" limitview="auto" />
+
+		<preview url="panos/Ba__o.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/Ba__o.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048" />
+		</image>
+		<hotspot name="spot1" style="skin_hotspotstyle" ath="-166.416" atv="28.866" linkedscene="scene_centro_terrazza" />
+
+	</scene>
+
+</krpano>

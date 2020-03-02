@@ -53,12 +53,17 @@ class TableFieldsGenerator
     /** @var array */
     public $ignoredFields;
 
-    public function __construct($tableName, $ignoredFields)
+    public function __construct($tableName, $ignoredFields, $connection = '')
     {
         $this->tableName = $tableName;
         $this->ignoredFields = $ignoredFields;
 
-        $this->schemaManager = DB::getDoctrineSchemaManager();
+        if (!empty($connection)) {
+            $this->schemaManager = DB::connection($connection)->getDoctrineSchemaManager();
+        } else {
+            $this->schemaManager = DB::getDoctrineSchemaManager();
+        }
+
         $platform = $this->schemaManager->getDatabasePlatform();
         $defaultMappings = [
             'enum' => 'string',
@@ -81,7 +86,7 @@ class TableFieldsGenerator
             }
         }
 
-        $this->primaryKey = static::getPrimaryKeyOfTable($tableName);
+        $this->primaryKey = $this->getPrimaryKeyOfTable($tableName);
         $this->timestamps = static::getTimestampFieldNames();
         $this->defaultSearchable = config('infyom.laravel_generator.options.tables_searchable_default', false);
     }
@@ -162,10 +167,9 @@ class TableFieldsGenerator
      *
      * @return string|null The column name of the (simple) primary key
      */
-    public static function getPrimaryKeyOfTable($tableName)
+    public function getPrimaryKeyOfTable($tableName)
     {
-        $schema = DB::getDoctrineSchemaManager();
-        $column = $schema->listTableDetails($tableName)->getPrimaryKey();
+        $column = $this->schemaManager->listTableDetails($tableName)->getPrimaryKey();
 
         return $column ? $column->getColumns()[0] : '';
     }
@@ -249,7 +253,7 @@ class TableFieldsGenerator
     {
         $field = new GeneratorField();
         $field->name = $column->getName();
-        $field->parseDBType($dbType);
+        $field->parseDBType($dbType, $column);
         $field->parseHtmlInput($htmlType);
 
         return $this->checkForPrimary($field);
@@ -417,33 +421,39 @@ class TableFieldsGenerator
         }
 
         // if foreign key is there
-        if ($isAnyKeyOnModelTable) {
-            foreach ($foreignKeys as $foreignKey) {
-                $foreignField = $foreignKey->foreignField;
-                $foreignTableName = $foreignKey->foreignTable;
+        if (!$isAnyKeyOnModelTable) {
+            return false;
+        }
 
-                // if foreign table is model table
-                if ($foreignTableName == $modelTableName) {
-                    $foreignTable = $modelTable;
-                } else {
-                    $foreignTable = $tables[$foreignTableName];
-                    // get the many to many model table name
-                    $manyToManyTable = $foreignTableName;
-                }
+        foreach ($foreignKeys as $foreignKey) {
+            $foreignField = $foreignKey->foreignField;
+            $foreignTableName = $foreignKey->foreignTable;
 
-                // if foreign field is not primary key of foreign table
-                // then it can not be many to many
-                if ($foreignField != $foreignTable->primaryKey) {
-                    return false;
-                    break;
-                }
-
-                // if foreign field is primary key of this table
-                // then it can not be many to many
-                if ($foreignField == $primary) {
-                    return false;
-                }
+            // if foreign table is model table
+            if ($foreignTableName == $modelTableName) {
+                $foreignTable = $modelTable;
+            } else {
+                $foreignTable = $tables[$foreignTableName];
+                // get the many to many model table name
+                $manyToManyTable = $foreignTableName;
             }
+
+            // if foreign field is not primary key of foreign table
+            // then it can not be many to many
+            if ($foreignField != $foreignTable->primaryKey) {
+                return false;
+                break;
+            }
+
+            // if foreign field is primary key of this table
+            // then it can not be many to many
+            if ($foreignField == $primary) {
+                return false;
+            }
+        }
+
+        if (empty($manyToManyTable)) {
+            return false;
         }
 
         $modelName = model_name_from_table_name($manyToManyTable);

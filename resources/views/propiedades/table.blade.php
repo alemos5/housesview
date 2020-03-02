@@ -8,6 +8,7 @@
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
+                <th>ID</th>
                 <th>Usuario</th>
                 <th>Titulo</th>
                 <th>Vencimiento</th>
@@ -19,8 +20,20 @@
         </thead>
         <tbody>
           @foreach($propiedades as $propiedades)
-            <tr>
-                <td>Mostrar aca UserName</td>
+              <?php if ($propiedades->script) { ?>
+              <tr style="background-color: #feebeb" >
+              <?php }else { ?>
+                    <tr>
+               <?php } ?>
+
+                   <td>{{$propiedades->id}}</td>
+                   <td>
+                    <?php
+                       $anunciante = \App\Clientes::where('id_cliente', $propiedades->user_id)->first();
+                       echo $anunciante['nombre'];
+                       ?>
+
+                   </td>
                 <td>{!! $propiedades->titulo !!}</td>
                 <td>
                     <?php

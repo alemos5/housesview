@@ -64,7 +64,7 @@ $planDuracions = \App\Models\PlanDuracions::where('plan_id', '=', $_GET['plan_id
                       <input type="hidden" name="valor_total_plan_text" id="valor_total_plan_text">
                   </div>
                   <div class="col-lg-12">
-                      <button class="btn btn-block btn-lg btn-success m-t-20" onclick="registerOrder()">Pagar </button>
+                      <button class="btn btn-block btn-lg btn-success m-t-20" onclick="registerOrder()">Continua con la compra </button>
 {{--                    <a  onclick="registerOrder()" href="https://www.mercadopago.com/mla/checkout/start?pref_id=156907953-3693c0d1-682a-4f07-b023-da70a8003c0c" class="btn btn-block btn-lg btn-success m-t-20">--}}
 {{--                        Pagar--}}
 {{--                    </a>--}}

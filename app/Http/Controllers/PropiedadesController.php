@@ -6,6 +6,7 @@ use App\Http\Requests\CreatePropiedadesRequest;
 use App\Http\Requests\UpdatePropiedadesRequest;
 use App\Mail\CreatePropiedad;
 use App\Mail\EmergencyCallReceived;
+use App\Models\PropiedadEavs;
 use App\Models\PropiedadEavValue;
 use App\Models\Propiedades;
 use App\Repositories\PropiedadesRepository;
@@ -71,22 +72,42 @@ class PropiedadesController extends AppBaseController
 //        $propiedades = $this->propiedadesRepository->all();
 
         $search = $this->getSearch($request);
+//        echo json_encode($request->all()); die();
+        $query = null;
         if($search) {
             $propiedades = DB::select('
                 SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
                     LEFT JOIN provincias b ON (a.provincias_id = b.id)
                     LEFT JOIN localidades c ON (a.localidads_id = c.id)
                     LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+                    LEFT JOIN propiedad_eav_value e ON (a.id = e.propiedad_id)
                 WHERE
                     ' . $search . '
+                GROUP BY a.id   
             ');
+//            $query = '
+//                SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
+//                    LEFT JOIN provincias b ON (a.provincias_id = b.id)
+//                    LEFT JOIN localidades c ON (a.localidads_id = c.id)
+//                    LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+//                WHERE
+//                    ' . $search . '
+//            ';
         }else{
             $propiedades = DB::select('
                 SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
                     LEFT JOIN provincias b ON (a.provincias_id = b.id)
                     LEFT JOIN localidades c ON (a.localidads_id = c.id)
                     LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+                    LEFT JOIN propiedad_eav_value e ON (a.id = e.propiedad_id)
+                GROUP BY a.id   
             ');
+//            $query = '
+//                SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
+//                    LEFT JOIN provincias b ON (a.provincias_id = b.id)
+//                    LEFT JOIN localidades c ON (a.localidads_id = c.id)
+//                    LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+//            ';
         }
 
         $data['propiedad'] = array();
@@ -96,19 +117,72 @@ class PropiedadesController extends AppBaseController
                 'amenities' => $this->getAmenities($propiedad->id)
             );
         }
-
+        $data['dataBusqueda'] = $request->all();
         return view('propiedades.index' , $data);
     }
 
 
 
 
-    public function map()
+    public function map(Request $request)
     {
-      $propiedades = Propiedades::get();
-        return view('propiedades.propiedadesmap', compact(
-          'propiedades'
-        ));
+//      $propiedades = Propiedades::get();
+//        return view('propiedades.propiedadesmap', compact(
+//          'propiedades'
+//        ));
+        $this->propiedadesRepository->pushCriteria(new RequestCriteria($request));
+//        $propiedades = $this->propiedadesRepository->all();
+
+        $search = $this->getSearch($request);
+//        echo json_encode($request->all()); die();
+        $query = null;
+        if($search) {
+            $propiedades = DB::select('
+                SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
+                    LEFT JOIN provincias b ON (a.provincias_id = b.id)
+                    LEFT JOIN localidades c ON (a.localidads_id = c.id)
+                    LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+                    LEFT JOIN propiedad_eav_value e ON (a.id = e.propiedad_id)
+                WHERE
+                    ' . $search . '
+                GROUP BY a.id   
+            ');
+//            $query = '
+//                SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
+//                    LEFT JOIN provincias b ON (a.provincias_id = b.id)
+//                    LEFT JOIN localidades c ON (a.localidads_id = c.id)
+//                    LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+//                WHERE
+//                    ' . $search . '
+//            ';
+        }else{
+            $propiedades = DB::select('
+                SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
+                    LEFT JOIN provincias b ON (a.provincias_id = b.id)
+                    LEFT JOIN localidades c ON (a.localidads_id = c.id)
+                    LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+                    LEFT JOIN propiedad_eav_value e ON (a.id = e.propiedad_id)
+                GROUP BY a.id   
+            ');
+//            $query = '
+//                SELECT a.*, b.provincia, c.localidad, d.nombre FROM propiedades a
+//                    LEFT JOIN provincias b ON (a.provincias_id = b.id)
+//                    LEFT JOIN localidades c ON (a.localidads_id = c.id)
+//                    LEFT JOIN clientes d ON (a.user_id = d.id_cliente)
+//            ';
+        }
+
+        $data['propiedad'] = array();
+        foreach ($propiedades as $propiedad) {
+            $data['propiedad'][] = array(
+                'data'      => $propiedad,
+                'amenities' => $this->getAmenities($propiedad->id)
+            );
+        }
+        $data['dataBusqueda'] = $request->all();
+        return view('propiedades.propiedadesmap' , $data);
+
+
     }
 
 
@@ -180,6 +254,27 @@ class PropiedadesController extends AppBaseController
                 $search .= 'a.tipo_duenio_id = '.$request->tipo_vendedor;
             }
         }
+
+        if (isset($request->amenities)) {
+            if ($search) {
+                $count =0;
+                $search .= ' AND (';
+                foreach ($request->amenities as $propiedadesEav) {
+                    if ($count == 0) {
+                        $search .= "e.propiedad_eav_id = ".$propiedadesEav;
+                    }else{
+                        $search .= " OR e.propiedad_eav_id = ".$propiedadesEav;
+                    }
+                    $count++;
+                }
+                $search .=")";
+            }else{
+                foreach ($request->amenities as $propiedadesEav) {
+                    $search .= "e.propiedad_eav_id = ".$propiedadesEav." OR ";
+                }
+            }
+        }
+//        echo $search; die();
 
         return $search;
 

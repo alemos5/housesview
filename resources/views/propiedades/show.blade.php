@@ -1,17 +1,35 @@
 @extends('layouts.app')
 @section('content')
-
+<?php
+$tipoOperacion = null;
+//echo json_encode($propiedades['tipo_operacions_id']); die();
+switch ($propiedades['tipo_operacions_id']) {
+    case 1:
+        $tipoOperacion = "Venta";
+        break;
+    case 2:
+        $tipoOperacion = "Alquiler";
+        break;
+    case 3:
+        $tipoOperacion = "Temporal";
+        break;
+}
+$anunciante = \App\Clientes::where('id_cliente', $propiedades['user_id'])->first();
+//echo json_encode($propiedades); die();
+?>
 <div class="container page">
   <div class="row">
     <div class="col-lg-8">
         <div class="propietydetail">
           <div class="col-lg-12">
             <div class="tags">
-              <span class="tagoperation">VENTA</span> <span class="tagdate">{{$propiedades['created_at']}}</span> <span class="tagview"><i class="fas fa-eye"></i> Visto:{{$propiedades['vista']}}</span>
+                <span class="tagoperation">{{$tipoOperacion}}</span>
+                <span class="tagdate"><?php echo date("d-m-Y", strtotime($propiedades['created_at'])); ?></span>
+                <span class="tagview"><i class="fas fa-eye"></i> Visto:{{$propiedades['vista']}}</span>
             </div>
               <h3>{{$propiedades['titulo']}} - {{$propiedades['direccion']}}</h3>
               <div class="recorrido">
-                <iframe src="http://visithouse.buhomedia.com.ar/tours/1/tour.html" width="" height=""></iframe>
+                <iframe src="http://visithouse.buhomedia.com.ar/tours/4/vtour/" width="" height=""></iframe>
                 <!--
                 <div id="pano" style="width:100%;height:100%;">
                   <noscript><table style="width:100%;height:100%;"><tr style="vertical-align:middle;"><td><div style="text-align:center;">ERROR:<br/><br/>Javascript not activated<br/><br/></div></td></tr></table></noscript>
@@ -23,54 +41,28 @@
 
               </div>
               <div class="propietycaract row">
-                <div class="col-lg-2">
-                    <i class="fas fa-eye"></i>
-                    Ambientes 2
-                </div>
-                <div class="col-lg-2">
-                    <i class="fas fa-eye"></i>
-                    Ambientes 2
-                </div>
-                <div class="col-lg-2">
-                    <i class="fas fa-eye"></i>
-                    Ambientes 2
-                </div>
-                <div class="col-lg-2">
-                    <i class="fas fa-eye"></i>
-                    Ambientes 2
-                </div>
-                <div class="col-lg-2">
-                    <i class="fas fa-eye"></i>
-                    Ambientes 2
-                </div>
+
+                  <?php
+                  $propiedadesItem = \App\Models\PropiedadEavValue::where('propiedad_id', $propiedades['id'])->get();
+                  foreach ($propiedadesItem as $amenity) {
+                      $atributo = \App\Models\PropiedadEavs::where('id', $amenity->propiedad_eav_id)->first();
+                      echo '<div class="col-lg-2">';
+                        echo $atributo->icon."&nbsp;".$atributo->attribute.": ".$amenity->cantidad."&nbsp;&nbsp;&nbsp;";
+                      echo '</div>';
+                  }
+                  ?>
+
               </div>
               <div class="ubicacion">
                 <h3>Ubicacion</h3>
                 <p>{{$propiedades['direccion']}} , Microcentro, Capital Federal</p>
-                <iframe width="95%" height="450"  frameborder="0" style="border:0"src="https://www.google.com/maps/embed/v1/place?q={{$propiedades['direccion']}}&key=AIzaSyASRlQkkJPSVOJOQhgNZru739GwiVKaK9o" allowfullscreen></iframe>
+                <iframe width="95%" height="450" class="iframe" src="https://maps.google.com/?ll={{$propiedades['latitud']}},{{$propiedades['longitud']}}=14&t=m&output=embed" frameborder="0" style="border:0" allowfullscreen></iframe>
               </div>
               <div class="propietydescrip">
                 <p><strong>Descripcion:</strong> </p>
-                <p>  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.   Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <p>{{$propiedades['descripcion']}}</p>
               </div>
-              <div class="propietydescrip">
-                <p><strong>Carateristicas Generales:</strong> </p>
-                <ul>
-                  <li>Apto profesional</li>
-                  <li>Wifi</li>
-                  <li>Apto mascotas</li>
-                  <li>Seguridad</li>
-                </ul>
-              </div>
-              <div class="propietydescrip">
-                <p><strong>Ambientes:</strong> </p>
-                <ul>
-                  <li>{{$propiedades['cant_dormitorio']}} Dormitorios</li>
-                  <li>1 Cocina</li>
-                  <li>{{$propiedades['cant_banio']}}  baño</li>
-                  <li>1 Living</li>
-                </ul>
-              </div>
+
           </div>
         </div>
     </div>
@@ -85,10 +77,10 @@
 
             </div>
             <div class="col-lg-2">
-              <img src="https://i0.wp.com/www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" alt="">
+              <img src="{{$anunciante->img}}" alt="">
             </div>
             <div class="col-lg-8 nopadding">
-              Sandra Gimenez
+              {{$anunciante->nombre}}
             </div>
           </div>
           <div class="col-lg-12">

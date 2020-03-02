@@ -30,9 +30,17 @@ class GeneratorField
     public $isNotNull = false;
     public $inIndex = true;
 
-    public function parseDBType($dbInput)
+    /**
+     * @param Column $column
+     * @param $dbInput
+     */
+    public function parseDBType($dbInput, $column = null)
     {
         $this->dbInput = $dbInput;
+        if (!is_null($column)) {
+            $this->dbInput = ($column->getLength() > 0) ? $this->dbInput.','.$column->getLength() : $this->dbInput;
+            $this->dbInput = (!$column->getNotnull()) ? $this->dbInput.':nullable' : $this->dbInput;
+        }
         $this->prepareMigrationText();
     }
 
@@ -43,6 +51,14 @@ class GeneratorField
 
         if (empty($htmlInput)) {
             $this->htmlType = 'text';
+
+            return;
+        }
+
+        if (Str::contains($htmlInput, 'selectTable')) {
+            $inputsArr = explode(':', $htmlInput);
+            $this->htmlType = array_shift($inputsArr);
+            $this->htmlValues = $inputsArr;
 
             return;
         }

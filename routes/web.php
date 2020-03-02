@@ -133,8 +133,11 @@ Route::get('/directorio/', function () { return view('front.directorio');})->nam
 /*Ruta de buscador*/
 // Route::get('/resultado-busqueda/', function(){return view('front.resultado-busqueda');})->name('resultado-busqueda');
 Route::get('/resultado-busqueda/',  'PropiedadesController@index')->name('resultado-busqueda');
+Route::post('/user/canlar-orden',  'OrdenesController@cancelarOrden')->name('cancelar-orden');
+
+
 Route::post('/resultado-busqueda-search/',  'PropiedadesController@search')->name('resultado-busqueda-search');
-Route::get('/resultado-busqueda-map/',  'PropiedadesController@map')->name('resultado-busqueda-map');
+Route::post('/resultado-busqueda-map/',  'PropiedadesController@map')->name('resultado-busqueda-map');
 Route::post('/user/clientes/update/{id}',  'ClientesController@updateCliente')->name('update-cliente');
 
 Route::get('/propiedad/{id}',  'PropiedadesController@show')->name('propiedad');
@@ -155,18 +158,24 @@ Route::get('/user/index', function(){
 Route::get('/user/publicate', function(){
     $ordenes = \App\Models\Ordenes::where('user_id', Auth::user()->id_cliente)->get();
     if (!$ordenes) {
+//        die("aqui");
         return view('payment');
     }else{
+
         $ordenes = \App\Models\Ordenes::where('user_id', Auth::user()->id_cliente)
             ->where('estatus', '0')->get();
-						// echo count($ordenes); die();
-        if (count($ordenes) < 0){
+//						 echo count($ordenes); die();
+        if (count($ordenes) <= 0){
+//            die("aqui 2");
             return view('payment');
         }else{
+//            die("aqui 3");
             return view('user.publicate');
         }
     }
 })->name('publicate');
+
+
 
 // Pagina de favoritos
 Route::get('/user/favoritos', function(){return view('user.favoritos');})->name('favoritos');
@@ -223,13 +232,8 @@ Route::resource('contactos', 'ContactosController');
 
 Route::resource('contactos', 'ContactosController');
 
-
-
-
-
-
 /*Damian vista mapa */
-//Rutas de direcciones
+//Rutas de direccionespayment-order
 Route::get('/propiedadesmap', function () {return view('propiedades.propiedadesmap');})->name('propiedadesmap');
 
 
@@ -237,3 +241,9 @@ Route::resource('clientes', 'ClientesController');
 
 
 Route::resource('clientes', 'ClientesController');
+
+/*Enlaces de pago*/
+
+Route::get('/ordenes/success/{id}',  'OrdenesController@success')->name('ordenes-success');
+Route::get('/ordenes/failure/{id}',  'OrdenesController@failure')->name('ordenes-failure');
+Route::get('/ordenes/pending/{id}',  'OrdenesController@pending')->name('ordenes-pending');
